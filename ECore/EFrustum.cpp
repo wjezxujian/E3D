@@ -21,7 +21,7 @@ namespace E3D
 		, mPerspectiveToScreen(EMatrix44::IDENTITY)
 	{
 		viewport_center_X = (viewport_width - 1)*0.5f;
-		viewport_center_Y = (viewport_width - 1)*0.5f;
+		viewport_center_Y = (viewport_height - 1)*0.5f;
 
 		aspect_ratio = viewport_width / viewport_height;
 

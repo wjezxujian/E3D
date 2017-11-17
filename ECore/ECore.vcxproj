@@ -42,7 +42,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -114,14 +114,18 @@
     <ClInclude Include="E3DHead.h" />
     <ClInclude Include="ECommon.h" />
     <ClInclude Include="EFrustum.h" />
+    <ClInclude Include="EGraphics.h" />
     <ClInclude Include="ELight.h" />
+    <ClInclude Include="EMath.h" />
     <ClInclude Include="EMatrix.h" />
     <ClInclude Include="EUtil.h" />
     <ClInclude Include="EVector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EFrustum.cpp" />
+    <ClCompile Include="EGraphics.cpp" />
     <ClCompile Include="ELight.cpp" />
+    <ClCompile Include="EMath.cpp" />
     <ClCompile Include="EMatrix.cpp" />
     <ClCompile Include="EUtil.cpp" />
     <ClCompile Include="EVector.cpp" />

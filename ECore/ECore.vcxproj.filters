@@ -30,10 +30,16 @@
     <ClInclude Include="ELight.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EFrustum.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EMath.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="ECommon.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="EFrustum.h">
+    <ClInclude Include="EGraphics.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +57,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="EFrustum.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EMath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EGraphics.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
