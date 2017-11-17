@@ -33,6 +33,9 @@
     <ClInclude Include="ECommon.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EFrustum.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EMatrix.cpp">
@@ -45,6 +48,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="ELight.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EFrustum.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

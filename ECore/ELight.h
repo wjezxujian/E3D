@@ -17,8 +17,10 @@ namespace E3D
 		EBool		lightOn;		//灯光是否启用
 
 		LIGHT_TYPE	lightType;		//灯光类型
+
 		EFloat		power;			//灯光的强度，默认为1.0f
 		EFloat		shadowFactor;	//灯光背面强度，默认为0.05f
+
 		EColor		ambient;		//灯光的环境色（环境光使用）
 		EColor		diffuse;		//灯光漫反射颜色
 		EColor		specular;		//灯光高光颜色
@@ -31,9 +33,29 @@ namespace E3D
 		EFloat		kc, kl, kq;		//衰减因子
 
 		EFloat		spot_inner;		//聚光灯内锥角
-		EFloat		
+		EFloat		spot_outer;		//聚光灯外锥角
+		EFloat		pf;				//聚光灯指数因子
+
+		ELight(EInt lightId, LIGHT_TYPE type);
 
 	};
 
+	//最大灯光数
+	#define MAX_LIGHTS 8
+
+	//全局灯光管理
+	extern std::vector<ELight*> *GLights;
+	typedef std::vector<ELight*>::iterator LightItr;
+
+	//创建一个新的灯光，创建成功返回灯光ID（全局唯一），创建失败返回-1
+	//场景内最大光源数为MAX_LIGHTS
+	extern EInt			CreateLight(LIGHT_TYPE lightType);
+
+	//获得一个灯光，如果灯光不存在，则返回nullptr
+	extern ELight*		GetLight(EInt id);
+	extern EInt			GetLightSize();
+
+	//清除全部光源
+	extern void			DestoryAllLights();
 
 }

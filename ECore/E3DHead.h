@@ -12,7 +12,7 @@ namespace E3D
 	struct EPolyon4D;		//基于顶点多边形
 	struct EPolyonF4D;		//基于索引多边形
 	struct EObject4D;		//对象
-	struct Eplane3D;		//三维平台
+	struct EPlane3D;		//三维平台
 	struct ERenderList4D;	//渲染列表
 
 	struct EFrustum;		//透视体
