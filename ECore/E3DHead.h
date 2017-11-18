@@ -2,7 +2,7 @@
 
 namespace E3D
 {
-	struct Ecolor;			//颜色
+	struct EColor;			//颜色
 	struct EVector2D;		//二维向量
 	struct EVector3D;		//三维向量
 	struct EVector4D;		//四维向量

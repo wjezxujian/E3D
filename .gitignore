@@ -1,11 +1,5 @@
 *.suo
 *.db
 *.opendb
-/.vs/E3D/v15/ipch/AutoPCH/406e0c2bf4b0e74c/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/68d5c7ff690a210b/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/a0a21dccd95ea1fb/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/a55106634e0dbd24/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/aa97bdcfdc749069/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/ad70d320e9161641/*.ipch
-/.vs/E3D/v15/ipch/AutoPCH/b1e05589ec9fc939/*.ipch
+*.ipch
 /.vs/config/*.config
