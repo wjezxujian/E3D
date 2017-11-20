@@ -42,6 +42,12 @@
     <ClInclude Include="EGraphics.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EMaterial.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ECore.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EMatrix.cpp">
@@ -63,6 +69,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="EGraphics.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EMaterial.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ECore.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

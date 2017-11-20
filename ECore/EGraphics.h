@@ -78,4 +78,5 @@ namespace E3D
 		static DIBSECTION		GDIBSection;
 		static RECT				GBufferSize;
 		static EFloat*			GZBuffer;
+	};
 }
