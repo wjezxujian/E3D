@@ -55,7 +55,7 @@ struct EVertex4D
 	EVertex4D operator*(const EVector4D& right);
 	EVertex4D operator-(const EVertex4D& right);
 	EVertex4D& operator=(const EVertex4D& right);
-	EVertex4D operator+(const EVertex4D& right);
+	EVertex4D operator+(const EVector4D& right);
 	EVertex4D operator+(const EVertex4D& right);
 	EVertex4D operator/(EFloat factor);
 
@@ -140,7 +140,7 @@ struct EObject4D
 	EString	 materialName;	//模型材质的名称，for Ogre Mesh
 
 	EVector4D minBoundingBox;	//模型正方体包围盒最小点
-	EVector4D maxBoindingBox;	//模型正方形包围盒做大点
+	EVector4D maxBoundingBox;	//模型正方形包围盒做大点
 
 	//这里不论是平移还是缩放，均以第一个模型的参数为准
 	EVector4D worldPosition;	//物体当前在世界坐标中的位置

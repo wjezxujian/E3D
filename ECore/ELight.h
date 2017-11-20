@@ -27,7 +27,7 @@ namespace E3D
 
 		EVector4D	position;		//灯光世界坐标位置
 		EVector4D	direction;		//光源朝向，电灯光无效
-		EVector4D	transPositon;	//灯光摄像机坐标系位置
+		EVector4D	transPosition;	//灯光摄像机坐标系位置
 		EVector4D	transDirection;	//摄像机坐标系光源朝向，电灯光无效
 
 		EFloat		kc, kl, kq;		//衰减因子
