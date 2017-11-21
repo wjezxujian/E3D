@@ -53,7 +53,7 @@ namespace E3D
 		//绘制字符串
 		static void drawString(const EString& str, EInt x, EInt y, const EColor& c = EColor(255, 255, 255));
 		//填充三角形
-		static void fillTriangle(EInt x0, EInt y0, EInt y1, EInt x2, EInt y2, const EColor& c = EColor(255, 255, 255));
+		static void fillTriangle(EInt x0, EInt y0, EInt y0, EInt y1, EInt x2, EInt y2, const EColor& c = EColor(255, 255, 255));
 		//平滑模式
 		static void enableSmoothingMode(EBool enable);
 

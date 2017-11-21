@@ -6,7 +6,7 @@ namespace E3D
 {
 	enum class LIGHT_TYPE
 	{
-		LIGHT_AMEIENT = 0,		//环境光
+		LIGHT_AMBIENT = 0,		//环境光
 		LIGHT_DIRECTION = 1,	//平行光
 		LIGHT_POINT = 2,		//点光源
 	};

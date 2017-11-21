@@ -217,7 +217,7 @@ void Remove_Backface_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
 //光照计算
 //光照计算只能在世界坐标系消除背面之后，或者在摄像机坐标系中进行
 void Light_PolyonF4D(EPolyonF4D* poly, EFrustum* camera);
-void Light_RenderList4D(ERenderList4D* renderList, EFustum* camera);
+void Light_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
 
 //世界坐标系变换成摄像机坐标系
 void World_To_Camera_Object4D(EObject4D& obj, EFrustum* camera);

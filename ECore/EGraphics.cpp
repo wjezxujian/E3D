@@ -146,7 +146,7 @@ namespace E3D
 		::TextOut(GBufferedHDC, x, y, str.c_str(), str.lenght());
 	}
 
-	void EGraphics::fillTraignle(EInt x0, EInt y0, EInt x1, EInt y1, EInt x2, EInt y2, const Color& c)
+	void EGraphics::fillTraignle(EInt x0, EInt y0, EInt y0, EInt x1, EInt y1, EInt x2, EInt y2, const Color& c)
 	{
 
 	}
