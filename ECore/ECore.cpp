@@ -114,24 +114,24 @@ namespace E3D
 
 	EPolyon4D::EPolyon4D()
 		:state(0)
-		,attribute(0)
-		,color(0xffffff)
-		,verList(nullptr)
+		, attribute(0)
+		, color(0xffffff)
+		, verList(nullptr)
 	{}
 
 	EPolyonF4D::EPolyonF4D()
 		:state(0)
-		,attribute(0)
-		,color(0xfffff)
+		, attribute(0)
+		, color(0xfffff)
 		/*,pre(nullptr), next(nullptr)*/
 	{}
 
 	EObject4D::EObject4D()
 		:nextObject(nullptr)
-		,materialName(DEFAULT_NAME)
-		,scale(1, 1, 1)
-		,direction(EVector4D::UNIT_X)
-		,needCull(true)
+		, materialName(DEFAULT_NAME)
+		, scale(1, 1, 1)
+		, direction(EVector4D::UNIT_X)
+		, needCull(true)
 	{}
 
 	void Tranform_Object4D(EObject4D* object, const EMatrix44& mat, OBJ_TRANSFORM_TYPE transformType /*, EBool transformBasis*/)
@@ -140,44 +140,44 @@ namespace E3D
 		switch (transformType)
 		{
 		case TRANSFORM_LOCAL:
+		{
+			while (obj)
 			{
-				while (obj)
+				//只对局部坐标进行变换
+				for (EInt i = 0; i < obj->vertexNumber; ++i)
 				{
-					//只对局部坐标进行变换
-					for (EInt i = 0; i < obj->vertexNumber; ++i)
-					{
-						GetVertex4DMulMatrix44(obj->localList[i], mat, obj->localList[i]);
-					}
-					obj = obj->nextObject;
+					GetVertex4DMulMatrix44(obj->localList[i], mat, obj->localList[i]);
 				}
+				obj = obj->nextObject;
 			}
-			break;
+		}
+		break;
 		case TRANSFORM_TRANS:
+		{
+			while (obj)
 			{
-				while (obj)
+				//将局部坐标变换后存储至变换后的坐标顶点列表
+				for (EInt i = 0; i < obj->vertexNumber; ++i)
 				{
-					//将局部坐标变换后存储至变换后的坐标顶点列表
-					for (EInt i = 0; i < obj->vertexNumber; ++i)
-					{
-						GetVertex4DMulMatrix44(obj->transformList[i], mat, obj->transformList[i]);
-					}
-					obj = obj->nextObject;
+					GetVertex4DMulMatrix44(obj->transformList[i], mat, obj->transformList[i]);
 				}
+				obj = obj->nextObject;
 			}
-			break;
+		}
+		break;
 		case TRANSFORM_LOCAL_TO_TRANS:
+		{
+			while (obj)
 			{
-				while (obj)
+				//将局部坐标变换后存储至变换后的坐标顶点列表
+				for (EInt i = 0; i < obj->vertexNumber; ++i)
 				{
-					//将局部坐标变换后存储至变换后的坐标顶点列表
-					for (EInt i = 0; i < obj->vertexNumber; ++i)
-					{
-						GetVertex4DMulMatrix44(obj->localList[i], mat, obj->transformList[i]);
-					}
-					obj = obj->nextObject;
+					GetVertex4DMulMatrix44(obj->localList[i], mat, obj->transformList[i]);
 				}
+				obj = obj->nextObject;
 			}
-			break;
+		}
+		break;
 		}
 	}
 
@@ -187,40 +187,40 @@ namespace E3D
 		switch (transformType)
 		{
 		case TRANSFORM_LOCAL:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
-				
-					GetVertex4DMulMatrix44(poly->localList[0], mat, poly->localList[0]);
-					GetVertex4DMulMatrix44(poly->localList[1], mat, poly->localList[1]);
-					GetVertex4DMulMatrix44(poly->localList[2], mat, poly->localList[2]);
-				}
-			}
-			break;
-		case TRANSFORM_TRANS:
-			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
+				poly = &(*itr);
 
-					GetVertex4DMulMatrix44(poly->transformList[0], mat, poly->transformList[0]);
-					GetVertex4DMulMatrix44(poly->transformList[1], mat, poly->transformList[1]);
-					GetVertex4DMulMatrix44(poly->transformList[2], mat, poly->transformList[2]);
-				}
+				GetVertex4DMulMatrix44(poly->localList[0], mat, poly->localList[0]);
+				GetVertex4DMulMatrix44(poly->localList[1], mat, poly->localList[1]);
+				GetVertex4DMulMatrix44(poly->localList[2], mat, poly->localList[2]);
 			}
-			break;
-		case TRANSFORM_LOCAL_TO_TRANS:
+		}
+		break;
+		case TRANSFORM_TRANS:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
-					GetVertex4DMulMatrix44(poly->localList[0], mat, poly->transformList[0]);
-					GetVertex4DMulMatrix44(poly->localList[1], mat, poly->transformList[1]);
-					GetVertex4DMulMatrix44(poly->localList[2], mat, poly->transformList[2]);
-				}
+				poly = &(*itr);
+
+				GetVertex4DMulMatrix44(poly->transformList[0], mat, poly->transformList[0]);
+				GetVertex4DMulMatrix44(poly->transformList[1], mat, poly->transformList[1]);
+				GetVertex4DMulMatrix44(poly->transformList[2], mat, poly->transformList[2]);
 			}
-			break;	
+		}
+		break;
+		case TRANSFORM_LOCAL_TO_TRANS:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
+			{
+				poly = &(*itr);
+				GetVertex4DMulMatrix44(poly->localList[0], mat, poly->transformList[0]);
+				GetVertex4DMulMatrix44(poly->localList[1], mat, poly->transformList[1]);
+				GetVertex4DMulMatrix44(poly->localList[2], mat, poly->transformList[2]);
+			}
+		}
+		break;
 		}
 	}
 
@@ -363,39 +363,39 @@ namespace E3D
 		switch (transformType)
 		{
 		case TRANSFORM_LOCAL:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
+				poly = &(*itr);
 
-					GetVertex4DAddVector4D(poly->localList[0], pos, poly->localList[0]);
-					GetVertex4DAddVector4D(poly->localList[1], pos, poly->localList[1]);
-					GetVertex4DAddVector4D(poly->localList[2], pos, poly->localList[2]);
-				}
+				GetVertex4DAddVector4D(poly->localList[0], pos, poly->localList[0]);
+				GetVertex4DAddVector4D(poly->localList[1], pos, poly->localList[1]);
+				GetVertex4DAddVector4D(poly->localList[2], pos, poly->localList[2]);
 			}
-			break;
+		}
+		break;
 		case TRANSFORM_LOCAL_TO_TRANS:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
-					GetVertex4DAddVector4D(poly->localList[0], pos, poly->transformList[0]);
-					GetVertex4DAddVector4D(poly->localList[1], pos, poly->transformList[1]);
-					GetVertex4DAddVector4D(poly->localList[2], pos, poly->transformList[2]);
-				}
+				poly = &(*itr);
+				GetVertex4DAddVector4D(poly->localList[0], pos, poly->transformList[0]);
+				GetVertex4DAddVector4D(poly->localList[1], pos, poly->transformList[1]);
+				GetVertex4DAddVector4D(poly->localList[2], pos, poly->transformList[2]);
 			}
-			break;
+		}
+		break;
 		case TRANSFORM_TRANS:
+		{
+			for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 			{
-				for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
-				{
-					poly = &(*itr);
-					GetVertex4DAddVector4D(poly->transformList[0], pos, poly->transformList[0]);
-					GetVertex4DAddVector4D(poly->transformList[1], pos, poly->transformList[1]);
-					GetVertex4DAddVector4D(poly->transformList[2], pos, poly->transformList[2]);
-				}
+				poly = &(*itr);
+				GetVertex4DAddVector4D(poly->transformList[0], pos, poly->transformList[0]);
+				GetVertex4DAddVector4D(poly->transformList[1], pos, poly->transformList[1]);
+				GetVertex4DAddVector4D(poly->transformList[2], pos, poly->transformList[2]);
 			}
-			break;
+		}
+		break;
 
 		}
 	}
@@ -411,7 +411,7 @@ namespace E3D
 		//先把当前物体的坐标变换成相机坐标
 		EVector4D centerPos;
 		GetVector4DMulMatrix44(object->worldPosition, camera->mWorldToCamera, centerPos);
-		
+
 		//首先把半径进行缩放
 		EFloat scaleRadiusZ;
 		EFloat scaleRadiusX;
@@ -482,17 +482,106 @@ namespace E3D
 		}
 
 		EPolyonF4D* poly = nullptr;
-		for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(), ++itr)
+		for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 		{
 			poly = &(*itr);
 
 			GetVertex4DMulMatrix44(poly->transformList[0], camera->mWorldToCamera, poly->transformList[0]);
 			GetVertex4DMulMatrix44(poly->transformList[1], camera->mWorldToCamera, poly->transformList[1]);
-			GetVertex4DMulMatrix44(poly->transformList[2], camera->mWorldToCamera, poly->transformList[2])
+			GetVertex4DMulMatrix44(poly->transformList[2], camera->mWorldToCamera, poly->transformList[2]);
 		}
 	}
 
+	void Sort_RenderList4D(ERenderList4D* renderList)
+	{
+		//这里对多边形列表进行深度排序（画家算法）
+		renderList->polyData.sort(CompEPolyonF4D());
+	}
 
 
-	
+	bool Remove_Backface(EPolyon4D* poly, EFrustum* camera)
+	{
+		EInt index0 = poly->verIndex[0];
+		EInt index1 = poly->verIndex[1];
+		EInt index2 = poly->verIndex[2];
+
+		//这里使用变换后的多边形顶点列表，因为背面消除只能在顶点被变化为世界坐标之后才能进行
+		//而在这里一般在相机坐标系内对其进行背面消除
+		//顶点是按顺序时针方向排列的 u = p0->p1 v = p0->p2 = uXv
+		EVector4D u = (poly->verList->at(index0) - poly->verList->at(index1)).toVector4D();
+		EVector4D v = (poly->verList->at(index0) - poly->verList->at(index2)).toVector4D();
+
+		//多边形法线
+		EVector4D n = u.crossProduct;
+		EVector4D view = camera->position - poly->verList->at(index0).toVector4D();
+
+		//求得量向量的点积，如果小于0，那么认为这个面背朝摄像机，不予显示
+		EFloat dot = n.dotProduct(view);
+		if (dot < 0.0f)
+		{
+			poly->state |= EPOLY_STATE_BACKFACE;
+			return true;
+		}
+
+		return false;
+	}
+
+	bool Remove_Backface(EPolyonF4D* poly, EFrustum* camera)
+	{
+		if (!(poly->state & EPOLY_STATE_ACTIVE) ||
+			(poly->state & EPOLY_STATE_BACKFACE) ||
+			(poly->state & EPOLY_STATE_CLIPPED))
+		{
+			return true;
+		}
+
+		//这里使用变换后的多边形顶点列表，因为背面消除只能在顶点被变换为世界坐标之后才能进行
+		//而在这里一般在相机坐标系内对其进行背面消除
+		//顶点时按顺时针方向排列的 u = p0->p1 v = p0->p2 = uXv;
+		EVector4D u = (poly->transformList[0] - poly->transformList[1]).toVector4D();
+		EVector4D v = (poly->transformList[0] - poly->transformList[1]).toVector4D();
+
+		EVector4D n = u.crossProduct(v);
+		EVector4D view = camera->position - poly->transformList[0].toVector4D();
+
+		//TODO
+		EFloat dot = n.dotProduct(view);
+		if (dot < 0)
+		{
+			poly->state |= EPOLY_STATE_BACKFACE;
+			return true;
+		}
+
+		return false;
+	}
+
+	void Remove_Backface_Object4D(EObject4D* object, EFrustum* camera)
+	{
+		EObject4D* obj = object;
+		EPolyon4D* poly = nullptr;
+		while (obj)
+		{
+			//物体没有被剔除
+			if (!obj->state & EOBJECT_STATE_CULLED))
+			{
+				for (EInt i = 0; i < obj->polyonNumber; ++i)
+				{
+					poly = &obj->polyonList[i];
+					Remove_Backface(poly, camera);
+				}
+			}
+			obj = obj->nextObject;
+		}
+	}
+
+	void Remove_Backface_RenderList4D(ERenderList4D* renderList, EFrustum* camera)
+	{
+		EPolyonF4D* poly = nullptr;
+
+		for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end();)
+		{
+
+		}
+	}
+
 }

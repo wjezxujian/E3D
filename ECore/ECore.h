@@ -208,7 +208,7 @@ bool Cull_Object4D(EObject4D* object, EFrustum* camera, CULL_TYPE cullType = CUL
 
 //消除背面，背面消除算法的摄像机视点是基于世界坐标系的，所以需要在顶点变换成摄像机坐标前进行背面消除
 bool Remove_Backface(EPolyon4D* poly, EFrustum* camera);
-bool Remove_Backface(EPolyon4D* poly, EFrustum* camera);
+bool Remove_Backface(EPolyonF4D* poly, EFrustum* camera);
 bool Remove_Backface_Object4D(EObject4D* object, EFrustum* camera);
 
 //light是否对多边形进行光照处理
