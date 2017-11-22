@@ -8,7 +8,7 @@ namespace E3D
 		, pixels(nullptr)
 	{
 		//材质脚本，首先获取默认路径
-		hBitmap = (HBITMAP)::LoadImage(GHInstance, GetPath(filename).c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+		hBitmap = (HBITMAP)::LoadImage(GHInstance, (LPCTSTR)GetPath(filename).c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
 
 		if (hBitmap != nullptr)
 		{
@@ -50,7 +50,7 @@ namespace E3D
 	HINSTANCE GHInstance;
 
 	HBITMAP				EGraphics::GBufferedHandle;
-	HBITMAP				EGraphics::GBufferedHDC;
+	HDC					EGraphics::GBufferedHDC;
 	HBRUSH				EGraphics::GBgBrush;
 	HPEN				EGraphics::GPen;
 	HINSTANCE			EGraphics::GInstance;
@@ -97,7 +97,7 @@ namespace E3D
 		::SelectObject(GBufferedHDC, GBgBrush);
 
 		//设置字体
-		HFONT hfnt = (HFONT)::GetStockObject(OEM_FIEXD_FONT);
+		HFONT hfnt = (HFONT)::GetStockObject(OEM_FIXED_FONT);
 		::SelectObject(GBufferedHDC, hfnt);
 		//设置文字背景为透明色
 		::SetBkMode(GBufferedHDC, TRANSPARENT);
@@ -105,7 +105,7 @@ namespace E3D
 		GZBuffer = new EFloat[SCREEN_WIDTH * SCREEN_HEIGHT];
 		memset(GZBuffer, 0, sizeof(EFloat) * SCREEN_WIDTH * SCREEN_HEIGHT);
 
-		return;
+		return true;
 	}
 
 	//关闭绘图系统
@@ -143,10 +143,11 @@ namespace E3D
 	void EGraphics::drawString(const EString& str, EInt x, EInt y, const EColor& c)
 	{
 		::SetTextColor(GBufferedHDC, RGB(c.r, c.g, c.b));
-		::TextOut(GBufferedHDC, x, y, str.c_str(), str.lenght());
+		::TextOut(GBufferedHDC, x, y, (LPCTSTR)str.c_str(), str.length());
+
 	}
 
-	void EGraphics::fillTraignle(EInt x0, EInt y0, EInt y0, EInt x1, EInt y1, EInt x2, EInt y2, const Color& c)
+	void EGraphics::fillTriangle(EInt x0, EInt y0, EInt x1, EInt y1, EInt x2, EInt y2, const EColor& c)
 	{
 
 	}
@@ -196,6 +197,6 @@ namespace E3D
 	//将已经绘制好的缓冲区递交给Graphics在屏幕上绘制，并将当前缓冲区设置为另一个缓冲区
 	void EGraphics::fillBuffer(HDC hdc)
 	{
-		::BitBlt(hdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GBufferedHDC, 0, 0, SRCCOPY)
+		::BitBlt(hdc, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GBufferedHDC, 0, 0, SRCCOPY);
 	}
 }

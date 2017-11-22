@@ -512,7 +512,7 @@ namespace E3D
 		EVector4D v = (poly->verList->at(index0) - poly->verList->at(index2)).toVector4D();
 
 		//多边形法线
-		EVector4D n = u.crossProduct;
+		EVector4D n = u.crossProduct(v);
 		EVector4D view = camera->position - poly->verList->at(index0).toVector4D();
 
 		//求得量向量的点积，如果小于0，那么认为这个面背朝摄像机，不予显示

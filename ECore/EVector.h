@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ECommon.h"
-//#include "EMath.h"
+#include "EMath.h"
 #include "EUtil.h"
 
 namespace E3D
@@ -51,8 +51,7 @@ namespace E3D
 			}
 
 			EFloat f = dotProduct(right) / lenProduct;
-			//f = Clamp(f, -1.0f, 1.0f);
-			f = std::min(std::max(f, -1.0f), 1.0f);
+			f = Clamp(f, -1.0f, 1.0f);
 			return acos(f);
 		}
 
@@ -324,8 +323,7 @@ namespace E3D
 				lenProduct = EPSILON_E6;
 
 			EFloat f = dotProduct(right) / lenProduct;
-			//f = Clamp(f, -1.0f, 1.0f);
-			f = std::min(std::max(f, -1.0f), 1.0f);
+			f = Clamp(f, -1.0f, 1.0f);
 
 			return acos(f);
 		}
@@ -377,7 +375,7 @@ namespace E3D
 		}
 
 		//向量取正
-		inline EVector4D operator-() const
+		inline EVector4D operator+() const
 		{
 			return EVector4D(+x, +y, +z, w);
 		}

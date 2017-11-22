@@ -32,7 +32,6 @@ namespace E3D
 			return defaultColor;
 	}
 
-	std::map<EString, EMaterial*>* GMaterials = nullptr;
 	static void initMaterial()
 	{
 		static bool init = false;
@@ -90,12 +89,12 @@ namespace E3D
 		{
 			EChar line[256];
 			//通过while循环读取每一行数据
-			while (in.good)
+			while (in.good())
 			{
 				in.getline(line, 256);
 				EString info = Trim(line);
 
-				if (!info.empty)
+				if (!info.empty())
 				{
 					//遇到“{”加+1，遇到“}”减1，当brackets为0时，跳出当前材质
 					EInt brackets = 0;
@@ -106,7 +105,7 @@ namespace E3D
 						EMaterial* material = new EMaterial();
 						material->name = Trim(info.substr(index + 8));
 
-						//封装到材质库
+						//装到全局材质库
 						SetMaterial(material->name, material);
 
 						in.getline(line, 256);
@@ -119,7 +118,7 @@ namespace E3D
 						while (brackets != 0)
 						{
 							in.getline(line, 256);
-							info.Trim(line);
+							info = Trim(line);
 
 							if (info == "{")
 								brackets++;
@@ -131,7 +130,7 @@ namespace E3D
 								std::size_t ambientIndex = info.find("ambient");
 								if (ambientIndex == 0)
 								{
-									sscanf(info.c_str(), "%s%f%f%f", temp, &material->ambient.r, &material->ambient.g, &material->ambient.b);
+									sscanf_s(info.c_str(), "%s%f%f%f", temp, &material->ambient.r, &material->ambient.g, &material->ambient.b);
 									continue;
 								}
 
@@ -139,7 +138,7 @@ namespace E3D
 								std::size_t diffuseIndex = info.find("diffuse");
 								if (diffuseIndex == 0)
 								{
-									sscanf(info.c_str(), "%s%f%f%f", temp, &material->diffuse.r, &material->diffuse.g, &material->diffuse.b);
+									sscanf_s(info.c_str(), "%s%f%f%f", temp, &material->diffuse.r, &material->diffuse.g, &material->diffuse.b);
 									continue;
 								}
 								
@@ -147,7 +146,7 @@ namespace E3D
 								std::size_t specularIndex = info.find("specular");
 								if (specularIndex == 0)
 								{
-									sscanf(info.c_str(), "%s%f%f%f", temp, &material->specular.r, &material->specular.g, &material->specular.b);
+									sscanf_s(info.c_str(), "%s%f%f%f", temp, &material->specular.r, &material->specular.g, &material->specular.b);
 									continue;
 								}
 
@@ -156,7 +155,7 @@ namespace E3D
 								if (textureIndex == 0)
 								{
 									EChar textureName[64];
-									sscanf(info.c_str(), "%s%s", temp, textureName);
+									sscanf_s(info.c_str(), "%s%s", temp, textureName);
 									material->bitmap = new EBitmap(textureName);
 									continue;
 								}

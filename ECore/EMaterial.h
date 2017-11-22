@@ -21,8 +21,8 @@ namespace E3D
 		EColor getPixel(EFloat u, EFloat v);
 	};
 
-	typedef ::std::map<EString, EMaterial*>::iterator MaterialIter;
-	extern ::std::map<EString, EMaterial*> GMaterials;
+	typedef std::map<EString, EMaterial*>::iterator MaterialIter;
+	extern std::map<EString, EMaterial*>* GMaterials = nullptr;
 
 	extern EMaterial* GetMaterial(const EString& name);
 	extern bool SetMaterial(const EString& name, EMaterial* material);

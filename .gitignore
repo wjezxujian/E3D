@@ -3,3 +3,10 @@
 *.opendb
 *.ipch
 /.vs/config/*.config
+*.lib
+*.pdb
+*.log
+*.obj
+*.idb
+*.tlog
+*.lastbuildstate

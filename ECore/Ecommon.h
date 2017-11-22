@@ -53,7 +53,7 @@ namespace E3D
 	#define Degree_TO_Radian(deg)(deg*0.017453f)
 	#define Radian_TO_Degree(rad)(rad*57.295780f)
 
-	#define Abs(a)(a>0?(a);-(a))
+	#define Abs(a)(a>0?(a):-(a))
 
 	#define KEY_DOWN(vk_code)(GetAsyncKeyState(vk_code) & 0x8000)?1:0)
 	#define KEY_UP(vk_code)(GetAsyncKeyState(vk_code) & 0x8000)?0:1)
