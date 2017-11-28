@@ -132,7 +132,7 @@ struct EObject4D
 	EString name;	//物体名称
 	EInt	state;	//物体状态
 	EInt	attribure;	//物体属性
-	EFloat	avaRaidus;	//物体的平均半径，用于碰撞检测
+	EFloat	avgRadius;	//物体的平均半径，用于碰撞检测
 	EFloat  maxRadius;	//物体的最大半径
 
 	EBool	needCull;	//是否需要执行剔除操作

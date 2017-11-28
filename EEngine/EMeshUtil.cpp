@@ -86,7 +86,7 @@ namespace E3D
 			//子网格标记
 			EUShort SUBMESH = ReadChunk(in);
 			EObject4D* curObject = nullptr;
-			while (!in.eof() && (SUBMESH == M_SUBMESH))
+			while (!in.eof() && (SUBMESH == (EUShort)OGREMESHID::M_SUBMESH))
 			{
 				std::vector<EUInt> indexArray;
 				std::vector<EFloat> vertexArray;
@@ -155,7 +155,7 @@ namespace E3D
 				EUShort GEOMETRY_VERTEX_DECLARATION = ReadChunk(in);
 				//网格几何顶点元素
 				EUShort GEOMETRY_VERTEX_ELEMENT = ReadChunk(in);
-				while (!in.eof() && GEOMETRY_VERTEX_ELEMENT == M_GEOMETRY_VERTEX_ELEMENT)
+				while (!in.eof() && GEOMETRY_VERTEX_ELEMENT == (EUShort)OGREMESHID::M_GEOMETRY_VERTEX_ELEMENT)
 				{
 					//绑定资源缓冲区
 					EUShort source = ReadShort(in);
@@ -167,7 +167,7 @@ namespace E3D
 					EUShort offset = ReadShort(in);
 					//颜色和纹理坐标索引值
 					EUShort index = ReadShort(in);
-					GEOMETRY_VERTEX_ELEMENT = ReadChunk(in):
+					GEOMETRY_VERTEX_ELEMENT = ReadChunk(in);
 				}
 
 				//顶点缓存
@@ -185,10 +185,80 @@ namespace E3D
 				//数据缓存大小
 				EInt bufferSize = vertexCount * vertexNum;
 
-				//读取顶点数据 179页
+				//读取顶点数据
+				vertexArray = ReadArray<EFloat>(in, bufferSize);
+
+				for (EInt i = 0; i < (EInt)vertexArray.size(); i += vertexNum)
+				{
+					EVertex4D vex;
+					//顶点坐标
+					vex.x = vertexArray[i];
+					vex.y = vertexArray[i + 1];
+					vex.z = vertexArray[i + 2];
+
+					//顶点UV
+					vex.u = vertexArray[i + 6];
+					vex.v = vertexArray[i + 7];
+
+					curObject->localList.push_back(vex);
+					curObject->transformList.push_back(vex);
+				}
+
+				for (EInt i = 0; i < curObject->polyonNumber; ++i)
+				{
+					EInt index = i * 3;
+					EPolyon4D poly;
+					poly.state = EPOLY_STATE_ACTIVE;
+					poly.attribute = EPOLY_ATTR_VERTEX_NORMAL | EPOLY_ATTR_VERTEX_POSITION | EPOLY_ATTR_VERTEX_UV;
+					poly.verIndex[0] = indexArray[index];
+					poly.verIndex[1] = indexArray[index + 1];
+					poly.verIndex[2] = indexArray[index + 2];
+
+					//这里将变换后的顶点指针交给每个多边形，是为了防止变换之后顶点索引依旧是最初的顶点坐标
+					poly.verList = &curObject->transformList;
+					curObject->polyonList.push_back(poly);
+				}
+
+				//子网格位置
+				EUShort SUBMESH_OPERATION = ReadChunk(in);
+				//操作类型
+				EUShort operationType = ReadShort(in);
+
+				SUBMESH = ReadChunk(in);
+			}
+
+			//网格包围盒
+			EUShort MESH_BOUNDS = SUBMESH;
+			if (MESH_BOUNDS == (EUShort)OGREMESHID::M_MESH_BOUNDS)
+			{
+				//最小包围盒和最大包围盒及计算半径
+				std::vector<EFloat> bounds = ReadArray<EFloat>(in, 7);
+				head->minBoundingBox = EVector4D(bounds[0], bounds[1], bounds[2]);
+				head->maxBoundingBox = EVector4D(bounds[3], bounds[4], bounds[6]);
+				head->avgRadius = (head->maxBoundingBox - head->minBoundingBox).length() / 2;
+
+				EFloat minR = head->minBoundingBox.length();
+				EFloat maxR = head->maxBoundingBox.length();
+				head->maxRadius = maxR > minR ? maxR : minR;
+
+				//子网格名字列表
+				EUShort SUBMESH_NAME_TABLE = ReadChunk(in);
+				if (SUBMESH_NAME_TABLE == (EUShort)OGREMESHID::M_SUBMESH_NAME_TABLE)
+				{
+					//子网格名字列表元素
+					EUShort SUBMESH_NAME_TABLE_ELEMENT = ReadChunk(in);
+					while (!in.eof() && SUBMESH_NAME_TABLE_ELEMENT == (EUShort)OGREMESHID::M_SUBMESH_NAME_TABLE_ELEMENT)
+					{
+						//名字和索引
+						EShort index = ReadShort(in);
+						EString name = ReadString(in);
+						SUBMESH_NAME_TABLE_ELEMENT = ReadChunk(in);
+					}
+				}
 
 			}
 		}
-
+		in.close();
+		return head;
 	}
 }

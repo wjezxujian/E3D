@@ -121,11 +121,14 @@
   <ItemGroup>
     <ClInclude Include="ECamera.h" />
     <ClInclude Include="EInputListener.h" />
+    <ClInclude Include="EMesh.h" />
     <ClInclude Include="EMeshUtil.h" />
+    <ClInclude Include="EObject.h" />
     <ClInclude Include="EOgreMeshInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp" />
+    <ClCompile Include="EMesh.cpp" />
     <ClCompile Include="EMeshUtil.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
