@@ -78,6 +78,55 @@ namespace E3D
 	//基于世界坐标系移动
 	void ECamera::move(const EVector3D& mov)
 	{
+		mFrustum->position.x = mov.x;
+		mFrustum->position.y = mov.y;
+		mFrustum->position.z = mov.z;
 
+		if (!mLockTarget)
+		{
+			mFrustum->camTarget.x += mov.x;
+			mFrustum->camTarget.y += mov.y;
+			mFrustum->camTarget.z += mov.z;
+		}
+
+		mNeedUpdate = true;
+	}
+
+	//基于摄像机自身坐标移动
+	void ECamera::moveRelative(const EVector3D& mov)
+	{
+		EVector4D offset = mFrustum->camRight * mov.x + mFrustum->camUp * mov.y + mFrustum->camLook * mov.z;
+
+		mFrustum->position = mFrustum->position + offset;
+
+		if (!mLockTarget)
+			mFrustum->camTarget = mFrustum->camTarget + offset;
+
+		mNeedUpdate = true;
+	}
+
+	//绕y轴旋转
+	void ECamera::yaw(EFloat yDegree)
+	{
+		EMatrix44 rotMat;
+		EVector4D distence = mFrustum->camTarget - mFrustum->position;
+		GetRotateMatrix44(rotMat, mFrustum->camUp, yDegree);
+		GetVector4DMulMatrix44(distence, rotMat, distence);
+
+		//旋转后的目标点
+		mFrustum->camTarget = distence + mFrustum->position;
+		mNeedUpdate = true;
+	}
+
+	//绕x轴旋转
+	void ECamera::pitch(EFloat pDegree)
+	{
+		EMatrix44 rotMat;
+		EVector4D distence = mFrustum->camTarget - mFrustum->position;
+		GetRotateMatrix44(rotMat, mFrustum->camRight, pDegree);
+		GetVector4DMulMatrix44(distence, rotMat, distence);
+		//旋转后的目标
+		mFrustum->camTarget = distence + mFrustum->position;
+		mNeedUpdate = true;
 	}
 }

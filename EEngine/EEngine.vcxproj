@@ -120,6 +120,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ECamera.h" />
+    <ClInclude Include="EInputListener.h" />
+    <ClInclude Include="EOgreMeshInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp" />

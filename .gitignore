@@ -10,3 +10,5 @@
 *.idb
 *.tlog
 *.lastbuildstate
+*.db-shm
+*.db-wal

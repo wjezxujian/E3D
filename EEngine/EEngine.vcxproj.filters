@@ -18,6 +18,12 @@
     <ClInclude Include="ECamera.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EInputListener.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EOgreMeshInfo.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp">
