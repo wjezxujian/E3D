@@ -36,6 +36,12 @@
     <ClInclude Include="ESceneManager.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EWindow.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ECanvas.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp">
@@ -48,6 +54,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="ESceneManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EWindow.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

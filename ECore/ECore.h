@@ -189,10 +189,10 @@ void Tranform_Object4D(EObject4D* obj, const EMatrix44& mat, OBJ_TRANSFORM_TYPE 
 
 //对ERenderList4D进行变换，可以进行位移变换和旋转变换
 //transformType指定了对哪一个顶点列表进行变换
-void Transform_Rectderlist4D(ERenderList4D* renderList, const EMatrix44& mat, OBJ_TRANSFORM_TYPE transformType);
+void Transform_Renderlist4D(ERenderList4D* renderList, const EMatrix44& mat, OBJ_TRANSFORM_TYPE transformType);
 
 //将Object插入RenderList，这里LocalList存储的是原始坐标，TransformList存储de是经过平移和缩放的坐标
-void Insert_Object4D_To_RenderList4D(
+void Inert_Object4D_To_RenderList4D(
 	ERenderList4D* renderList, EObject4D* obj,
 	OBJ_TRANSFORM_TYPE transformType = TRANSFORM_LOCAL_TO_TRANS,
 	bool transformScaleAndPosition = false);
@@ -220,7 +220,7 @@ void Light_PolyonF4D(EPolyonF4D* poly, EFrustum* camera);
 void Light_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
 
 //世界坐标系变换成摄像机坐标系
-void World_To_Camera_Object4D(EObject4D& obj, EFrustum* camera);
+void World_To_Camera_Object4D(EObject4D* obj, EFrustum* camera);
 void World_To_Camera_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
 
 //对RnederList的多边形进行深度排序，使用画家算法
@@ -229,7 +229,7 @@ void Sort_RenderList4D(ERenderList4D* renderList);
 
 //相机坐标转换为透视坐标
 void Camera_To_Perspective_Object4D(EObject4D* obj, EFrustum* camera);
-void Cmaera_To_Perspective_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
+void Camera_To_Perspective_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
 
 //对RenderList4D进行裁剪操作，裁剪掉超出摄像机范围内的多边形，此操作必须在摄像机空间内执行
 void Clip_RenderList4D(ERenderList4D* renderList, EFrustum* camera);
@@ -247,7 +247,7 @@ void Draw_RenderList4D_Wire(ERenderList4D* renderList);
 
 //渲染实体模型
 void Draw_Object4D_Solid(EObject4D* object);
-void Drew_RenderList4D_Solod(ERenderList4D* renderList);
+void Draw_RenderList4D_Solid(ERenderList4D* renderList);
 
 //绘制带纹理的renderList
 void Draw_RenderList4D_Texture_Solid(ERenderList4D* renderList);

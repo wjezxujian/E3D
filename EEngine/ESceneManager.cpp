@@ -132,25 +132,25 @@ namespace E3D
 			if (iter->second->isVisible() & !Cull_Object4D(iter->second->getObject(), mCamera->getFrustum(), CULL_BOX))
 			{
 				mVisibleObjectNumber++;
-				Inert_Object4D_To_RenderList4D(mRenderList, iter->second->getObject()), TRANSFORM_TRANS, true);
+				Inert_Object4D_To_RenderList4D(mRenderList, iter->second->getObject(), TRANSFORM_TRANS, true);
 			}
 		}
 
 		//渲染列表进行3D流水线处理
 		//局部坐标系变换到世界坐标系
-		Local_To_Wolrd_RenderList4D(mRenderList, EVector4D::ZERO, TRANSFORM_TRANS);
+		Local_To_World_RenderList4D(mRenderList, EVector4D::ZERO, TRANSFORM_TRANS);
 		//世界坐标系直接变化到屏幕坐标系
 		//世界坐标系->别面消除->摄像机坐标系变换->裁剪->光照计算->透视变换->屏幕变换
-		World_To_Screen_RenderList4D(mRenderList, mCamera->getFrustum);
+		World_To_Screen_RenderList4D(mRenderList, mCamera->getFrustum());
 
 		//当前可见多边形个数
 		mVisiblePolyonNumber = mRenderList->polyData.size();
 
 		//执行渲染
-		if (mCamera - getRenderMode() == RenderMode::RENDER_WIRE)
+		if (mCamera->getRenderMode() == RenderMode::RENDER_WIRE)
 			Draw_RenderList4D_Wire(mRenderList);
 		else
-			Draw_RenderList4D_Teture_Solid(mRenderList);
+			Draw_RenderList4D_Texture_Solid(mRenderList);
 	}
 
 	EMesh* ESceneManager::createTerrian(const EString& heightMapFileName, const EString& textureFileName,

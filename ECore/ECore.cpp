@@ -591,7 +591,7 @@ namespace E3D
 		}
 	}
 
-	void Light_PolyF4D(EPolyonF4D* poly, EFrustum* camera)
+	void Light_PolyonF4D(EPolyonF4D* poly, EFrustum* camera)
 	{
 		EBool lightOn = false;
 		EColor baseColor(poly->color);
@@ -711,7 +711,7 @@ namespace E3D
 		for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
 		{
 			poly = &(*itr);
-			Light_PolyF4D(poly, camera);
+			Light_PolyonF4D(poly, camera);
 		}
 	}
 
@@ -1387,7 +1387,7 @@ namespace E3D
 		Draw_Bottom_Trangle(newX, y1, newZ, newU, newV, x1, y1, z1, u1, v1, x2, y2, z2, u2, v2, poly->material, EColor(poly->color));
 	}
 
-	void Draw_RenderList4D_Teture_Solid(ERenderList4D* renderList)
+	void Draw_RenderList4D_Texture_Solid(ERenderList4D* renderList)
 	{
 		EPolyonF4D* poly = nullptr;
 		for (ERenderList4D::Itr itr = renderList->polyData.begin(); itr != renderList->polyData.end(); ++itr)
