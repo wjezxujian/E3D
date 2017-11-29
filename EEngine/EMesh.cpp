@@ -141,12 +141,50 @@ namespace E3D
 		if (point.x < mObject->worldPosition.x - x || point.x > mObject->worldPosition.x + x)
 			return false;
 
-		//190ҳ
+		if (point.y < mObject->worldPosition.y - y || point.y > mObject->worldPosition.y + y)
+			return false;
+
+		if (point.z < mObject->worldPosition.z - z || point.z > mObject->worldPosition.z + z)
+			return false;
+
+		return true;
 	}
 
+	EMesh* EMesh::clone()
+	{
+		EMesh* mesh = new EMesh();
+		{
+			mesh->mName = mName + "_Clone";
+			mesh->mPolyonNumber = mPolyonNumber;
+			mesh->mRotate = mRotate;
+			mesh->mSubmeshNumber = mSubmeshNumber;
+			mesh->mVertexNumber = mVertexNumber;
 
+			EObject4D* object = new EObject4D();
+			{
+				object->attribute = mObject->attribute;
+				object->avgRadius = mObject->avgRadius;
+				object->direction = mObject->direction;
+				object->localList = mObject->localList;
+				object->transformList = mObject->transformList;
+				object->materialName = mObject->materialName;
+				object->maxBoundingBox = mObject->maxBoundingBox;
+				object->maxRadius = object->maxRadius;
+				object->minBoundingBox = mObject->minBoundingBox;
+				object->needCull = mObject->needCull;
+				object->name = mObject->name;
+				object->polyonList = mObject->polyonList;
+				object->polyonNumber = mObject->polyonNumber;
+				object->scale = mObject->scale;
+				object->state = mObject->state;
+				object->vertexNumber = mObject->vertexNumber;
+				object->worldPosition = mObject->worldPosition;
+				object->nextObject = nullptr;
+			}
+			mesh->mObject = object;
+			mesh->mIsVisible = true;
+		}
 
-
-
-
+		return mesh;
+	}
 }
