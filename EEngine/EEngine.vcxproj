@@ -125,11 +125,13 @@
     <ClInclude Include="EMeshUtil.h" />
     <ClInclude Include="EObject.h" />
     <ClInclude Include="EOgreMeshInfo.h" />
+    <ClInclude Include="ESceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp" />
     <ClCompile Include="EMesh.cpp" />
     <ClCompile Include="EMeshUtil.cpp" />
+    <ClCompile Include="ESceneManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

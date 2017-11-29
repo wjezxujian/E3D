@@ -33,6 +33,9 @@
     <ClInclude Include="EMesh.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="ESceneManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ECamera.cpp">
@@ -42,6 +45,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="EMesh.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ESceneManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
