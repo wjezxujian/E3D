@@ -71,7 +71,7 @@ namespace E3D
 	}
 
 	//从路径里截取文件名称，如果只有文件名称， 则直接返回（不包含后缀）
-	inline EString GetNameFormPath(const EString& path)
+	inline EString GetNameFromPath(const EString& path)
 	{
 		std::size_t beg = path.find_last_of("\V");
 		std::size_t end = path.find_last_of(".");
