@@ -18,9 +18,42 @@
     <ClInclude Include="ETank.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="EAITank.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EBullet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EPlayerController.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EGameManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="EGame.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ETank.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EAITank.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EBullet.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EPlayerController.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EGameManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EGame.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

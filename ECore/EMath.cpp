@@ -74,7 +74,7 @@ namespace E3D
 
 	}
 
-	void E3D::GetVertor3DMulMatrix44(const EVector3D & vec, const EMatrix44 & mat, EVector3D & result)
+	void E3D::GetVector3DMulMatrix44(const EVector3D & vec, const EMatrix44 & mat, EVector3D & result)
 	{
 		EFloat x = vec.x * mat.m[0][0] + vec.y * mat.m[1][0] + vec.z * mat.m[2][0] + mat.m[3][0];
 		EFloat y = vec.x * mat.m[0][1] + vec.y * mat.m[1][1] + vec.z * mat.m[2][1] + mat.m[3][1];

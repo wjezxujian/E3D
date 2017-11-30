@@ -18,7 +18,7 @@ namespace E3D
 		~ESceneManager();
 
 		//绘制文字
-		void drwaString(const EString& str, EInt x, EInt y, const EColor& c = EColor(255, 255, 255));
+		void drawString(const EString& str, EInt x, EInt y, const EColor& c = EColor(255, 255, 255));
 
 		//创建一个模型实体
 		EMesh* createMesh(const EString& name, const EString& meshName);

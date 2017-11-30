@@ -205,6 +205,12 @@ namespace E3D
 		}
 
 		//向量与数值相乘
+		inline EVector3D operator*(float right) const
+		{
+			return EVector3D(x * right, y * right, z * right);
+		}
+
+		//向量与向量相乘
 		inline EVector3D operator*(const EVector3D& right) const
 		{
 			return EVector3D(x * right.x, y * right.y, z * right.z);

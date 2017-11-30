@@ -46,7 +46,7 @@ namespace E3D
 	void GetRotateMatrix44(EMatrix44& mat, const EVector4D& normal, EFloat degree);
 
 	//3D向量x44矩阵
-	void GetVertor3DMulMatrix44(const EVector3D& vec, const EMatrix44& mat, EVector3D& result);
+	void GetVector3DMulMatrix44(const EVector3D& vec, const EMatrix44& mat, EVector3D& result);
 	//4D向量x44矩阵
 	void GetVector4DMulMatrix44(const EVector4D& vec, const EMatrix44& mat, EVector4D& result);
 

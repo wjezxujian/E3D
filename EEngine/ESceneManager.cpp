@@ -30,7 +30,7 @@ namespace E3D
 		SafeDelete(mRenderList);
 	}
 
-	void ESceneManager::drwaString(const EString& str, EInt x, EInt y, const EColor& c)
+	void ESceneManager::drawString(const EString& str, EInt x, EInt y, const EColor& c)
 	{
 		EGraphics::drawString(str, x, y, c);
 	}

@@ -118,10 +118,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EAITank.h" />
+    <ClInclude Include="EBullet.h" />
+    <ClInclude Include="EGame.h" />
+    <ClInclude Include="EGameManager.h" />
+    <ClInclude Include="EPlayerController.h" />
     <ClInclude Include="ETank.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EAITank.cpp" />
+    <ClCompile Include="EBullet.cpp" />
+    <ClCompile Include="EGame.cpp" />
+    <ClCompile Include="EGameManager.cpp" />
+    <ClCompile Include="EPlayerController.cpp" />
     <ClCompile Include="ETank.cpp" />
+    <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
