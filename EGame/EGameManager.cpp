@@ -78,10 +78,215 @@ namespace E3D
 		EBullet* bullet = new EBullet(owner, meshname, this);
 		if (meshname == Bullet_Rocket)
 		{
-			//268页面
+			bullet->setScale(EVector3D(1.5f, 1.5f, 1.5f));
 		}
+		mBullets.push_back(bullet);
+		return bullet;
 	}
 
+	void EGameManager::destroyBullet(EBullet* bullet)
+	{
+		//这里直接设置当前生命值比最大生命值大，update时自动删除
+		bullet->mCurrentLive = bullet->mMaxLive + 1;
+	}
+
+	ETank* EGameManager::createAITank(const EVector3D& pos)
+	{
+		static EInt ID = 0;
+		EString name = "AI#" + IntToString(ID++);
+		ETank* tank = new EAITank(name, "Tank1", this);
+		tank->setPosition(pos);
+		mTanks.push_back(tank);
+		return tank;
+	}
+
+	void EGameManager::update()
+	{
+		if (isGameBegin() && !finishGame())
+		{
+			//不足最大显示，那么创建
+			if ((EInt)mTanks.size() < mVisibleEnemyNumber)
+			{
+				EInt curNum = (EInt)mTanks.size();
+				for (EInt i = 0; i < mVisibleEnemyNumber - curNum; ++i)
+				{
+					if (mCurrentEnemyNumber + (EInt)mTanks.size() < mMaxEnemyNumber)
+						createAITank(RandomPos[RandomInt(0, 2)]);
+				}
+			}
+
+			//更新坦克，如果坦克存在，那么就更新，否则将其删除
+			for (TankIter itr = mTanks.begin(); itr != mTanks.end(); )
+			{
+				if ((*itr)->isAlive())
+				{
+					(*itr)->update();
+					++itr;
+				}
+				else
+				{
+					mCurrentEnemyNumber++;
+					SafeDelete(*itr);
+					mTanks.erase(itr++);
+				}
+			}
+		}
+
+		//更新子弹，如果子弹存在的话，那么久更新，否负责将其删除
+		for (BulletIter itr = mBullets.begin(); itr != mBullets.end();)
+		{
+			if ((*itr)->isAlive())
+			{
+				(*itr)->update();
+				++itr;
+			}
+			else
+			{
+				SafeDelete(*itr);
+				mBullets.erase(itr++);
+			}
+		}
+
+		mMainPlayer->update();
+	}
+
+	void EGameManager::changeMap(const EString& mapName)
+	{
+		//删除场景
+		SafeDelete(mMainPlayer);
+		for (BulletIter itr = mBullets.begin(); itr != mBullets.end(); ++itr)
+			SafeDelete(*itr);
+
+		for (TankIter itr = mTanks.begin(); itr != mTanks.end(); ++itr)
+			SafeDelete(*itr);
+
+		mBullets.clear();
+		mTanks.clear();
+
+		mCollisionValue.clear();
+		mCollisionMeshs.clear();
+
+		//敌人置于0
+		mCurrentEnemyNumber = 0;
+
+		//清理实机的模型
+		mScene->clearMesh();
+
+		//新建角色
+		mMainPlayer = new EPlayerController(this);
+		mMainPlayer->setPosition(InitPosition);
+
+		//加载场景
+		loadMap(mapName);
+	}
+
+	EString getBlock(const EString& line, char ltip, char rtip)
+	{
+		EInt beg = line.find(ltip);
+		EInt end = line.rfind(rtip);
+		return line.substr(beg + 1, end - beg - 1);
+	}
+
+	EVector3D getPos(const EString& line)
+	{
+		//<Position X = "-49.649979" Y = "4.2472636" Z = "-5.005510" />
+		EInt xb = line.find("X");
+		EInt yb = line.find("Y");
+		EInt zb = line.find("Z");
+		EInt end = line.find("/");
+		EString xs = line.substr(xb + 3, yb - 5 - xb);
+		EString ys = line.substr(yb + 3, zb - 5 - yb);
+		EString zs = line.substr(zb + 3, end - zb - 5);
+
+		return EVector3D(StringToFloat(xs), StringToFloat(ys), StringToFloat(zs));
+	}
+
+	void getXZ(const EString& line, EInt& x, EInt& z, EFloat& blockSize)
+	{
+		//<Grid X="15" Z="14" Size="10" />
+		EInt xb = line.find("X");
+		EInt zb = line.find("Z");
+		EInt sb = line.find("Size");
+		EInt end = line.find("/");
+		EString xs = line.substr(xb + 3, zb - 5 - xb);
+		EString zs = line.substr(zb + 3, sb - 5 - zb);
+		EString ss = line.substr(sb + 6, end - sb - 8);
+
+		x = StringToFloat(xs);
+		z = StringToFloat(zs);
+		blockSize = StringToFloat();
+	}
+
+	void getValue(const EString& line, EInt& x, EInt& z, EInt& value)
+	{
+		//<Map X="6" Z="2" Value="0" />
+		EInt xb = line.find("X");
+		EInt zb = line.find("Z");
+		EInt sb = line.find("Value");
+		EInt end = line.find("/");
+		EString xs = line.substr(xb + 3, zb - 5 - xb);
+		EString zs = line.substr(zb + 3, sb - 5 - zb);
+		EString ss = line.substr(sb + 7, end - sb - 9);
+
+		x = StringToFloat(xs);
+		z = StringToFloat(zs);
+		value = StringToFloat(ss);
+	}
+
+	EBool EGameManager::loadMap(const EString& mapName)
+	{
+		mCurMap = mapName;
+		Log("Loading map#%s...", mapName.c_str());
+
+		mCollisionValue.clear();
+		mCollisionMeshs.clear();
+
+		std::ifstream in;
+		in.open(GetPath(mapName).c_str());
+
+		if (in.bad())
+		{
+			in.close();
+			return false;
+		}
+
+		char line[256];
+		while (in.good())
+		{
+			EString info;
+			in.getline(line, 256);
+			info = Trim(line);
+
+			int beg = 0, end = -1;
+
+			if (info.find("Config") != -1)
+			{
+				//<Config Name="map001" >
+				EString mapName = getBlock(info, '\"', '\"');
+
+				//<Mesh> Terr_Forest_1 </Mesh>
+				in.getline(line, 256);
+				info = Trim(line);
+				EString meshName = getBlock(info, '>', '<') + ".mesh";
+
+				//<Grid X="15" Z="14" Size="10" />
+				in.getline(line, 256);
+
+				getXZ(line, mX, mZ, mBlockSize);
+				mXL = mX * mBlockSize;
+				mZL = mZ * mBlockSize;
+				mHXL = mXL / 2.0f;
+				mHZL = mZL / 2.0f;
+
+				//初始化碰撞位置数据
+				for (EInt i = 0; i <= mZ; ++i)
+				{
+					//273页面
+				}
+			}
+
+		}
+	}
 
 
 
