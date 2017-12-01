@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="E3D::ECamera" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEgAAAQgAgACAAACAIAACCACAAEgAAAAAAwAEAAA=</HashCode>
+      <FileName>ECamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::ESceneManager" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIEgAABBCJAiIgAYAAAEQAAQQAAEBAIAgAAQAEEAA=</HashCode>
+      <FileName>ESceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::ECanvas" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAA=</HashCode>
+      <FileName>ECanvas.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::EInputListener" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAABAAAAAAAAgIAAAAEEIAAAAAA=</HashCode>
+      <FileName>EInputListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::EMesh" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAKIgAARAACBCgADAAQAgiBBQAA0AKAgAAEgAgAAA=</HashCode>
+      <FileName>EMesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::EObject" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAgEAAEGAAA=</HashCode>
+      <FileName>EObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E3D::EGameWindow" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUIAAAAAgKAAAMCAAAACkiNQDAAAACgBAAIgAAAQAAA=</HashCode>
+      <FileName>EWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="E3D::RenderMode" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ECamera.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="E3D::COLLSION_TYPE" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EMesh.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="E3D::OGREMESHID" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAABEABAAAAAIAAAAAgAAAAgACAIAAAAIggA=</HashCode>
+      <FileName>EOgreMeshInfo.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="E3D::OperationType" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAIIAAFAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>EOgreMeshInfo.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

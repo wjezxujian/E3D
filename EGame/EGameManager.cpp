@@ -281,14 +281,154 @@ namespace E3D
 				//初始化碰撞位置数据
 				for (EInt i = 0; i <= mZ; ++i)
 				{
-					//273页面
+					mCollisionValue.push_back(std::vector<EInt>(mX + 1, 0));
+					mCollisionMeshs.push_back(std::vector<EMesh*>(mX + 1, 0));
 				}
+
+				//</Config>
+				in.getline(line, 256);
+
+				mTerrainMesh = mScene->createMesh(mapName, meshName);
+				mTerrainMesh->setCullFlag(false);
 			}
 
+			in.getline(line, 256);
+			info = Trim(line);
+
+			if (info.find("Notes") != -1)
+			{
+				in.getline(line, 256);
+				info = Trim(line);
+				while (info.find("Note") != -1)
+				{
+					int i = info.find("</Node>");
+					if (i != -1)
+					{
+						break;
+					}
+
+					//<Node Name="Tree_3#120">
+					EString nodeName = getBlock(info, '\"', '\"');
+
+					//<Mesh>Tree_3</Mesh>
+					in.getline(line, 256);
+					info = Trim(line);
+					EString meshName = getBlock(info, '>', '<') + ".mesh";
+
+					//<Position X="-49.649979" Y="4.247236" Z="-5.005510" />
+					in.getline(line, 256);
+					info = Trim(line);
+					EVector3D pos = getPos(info);
+
+					EMesh* object = mScene->createMesh(nodeName, meshName);
+					object->setPosition(pos);
+
+					//<Map X="6" Z="2" Value="0" />
+					in.getline(line, 256);
+					EInt x, y, value;
+					getValue(line, x, z, value);
+					if (value >= mCollisionValue[z][x])
+					{
+						mCollisionValue[z][x] = value;
+						mCollisionMeshs[z][x] = object;
+					}
+
+					//</Node>
+					in.getline(line, 256);
+					in.getline(line, 256);
+					info = Trim(line);
+				}
+			}	
+		}
+
+		in.close();
+		Log("Map Load Succedded!");
+		return true;
+	}
+
+	EBool EGameManager::canGO(EFloat x, EFloat z)
+	{
+		//超出边界
+		if (x <= -mHXL || x >= mHXL || z <= -mHZL || z >= mHZL)
+			return false;
+
+		EInt xoff = (EInt)((x + mHXL) / mBlockSize);
+		EInt zoff = (EInt)((z + mHZL) / mBlockSize);
+
+		if (mCollisionValue[xoff][zoff] > 0)
+			return false;
+
+		return true;
+	}
+
+	void EGameManager::getLogicXZ(EFloat x, EFloat z, EInt& outX, EInt& outZ)
+	{
+		//超出边界
+		if (x <= -mHXL || x >= mHXL || z <= -mHZL || z >= mHZL)
+		{
+			outX = outZ = -1;
+		}
+		else
+		{
+			outX = (EInt)((x + mHXL) / mBlockSize);
+			outZ = (EInt)((z + mHZL) / mBlockSize);
 		}
 	}
 
+	EMesh* EGameManager::checkObject(EFloat x, EFloat z)
+	{
+		//超出边界
+		if (x <= -mHXL || x >= mHXL || z <= -mHZL || z >= mHZL)
+			return mTerrainMesh;
 
+		EInt xoff = (EInt)((x + mHXL) / mBlockSize);
+		EInt zoff = (EInt)((z + mHZL) / mBlockSize);
 
+		if (mCollisionValue[xoff][zoff] > 0)
+			return mCollisionMeshs[xoff][zoff];
+		else
+			return nullptr;
+	}
 
+	ETank* EGameManager::checkTank(EFloat x, EFloat y, EFloat z)
+	{
+		//首先检查主角
+		if (mMainPlayer->getTank()->intersect(EVector3D(x, y, z)))
+			return mMainPlayer->getTank();
+
+		for (TankIter itr = mTanks.begin(); itr != mTanks.end(); ++itr)
+		{
+			if ((*itr)->intersect(EVector3D(x, y, z)))
+				return *itr;
+		}
+		return nullptr;
+	}
+
+	void EGameManager::playSound(SOUND_TYPE sound, EBool loop)
+	{
+		const static EString Background = "Background.wav";
+		const static EString Fire = "Fire.wav";
+		const static EString Explode = "Explosion.wav";
+		EInt flag = /*SDN_NOSTOP|*/SND_ASYNC;
+
+		if (loop)
+			flag |= SND_LOOP;
+
+		EString soundName = Background;
+		switch (sound)
+		{
+		case SOUND_TYPE::SOUND_BACKGROUND:
+			soundName = Background;
+			break;
+		case SOUND_TYPE::SOUND_FIRE:
+			soundName = Fire;
+			break;
+		case SOUND_TYPE::SOUND_EXPLODE:
+			soundName = Explode;
+			break;
+
+		}
+
+		::sndPlaySound(GetPath(soundName).c_str(), flag);
+	}
 }

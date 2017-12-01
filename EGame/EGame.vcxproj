@@ -124,6 +124,7 @@
     <ClInclude Include="EGameManager.h" />
     <ClInclude Include="EPlayerController.h" />
     <ClInclude Include="ETank.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EAITank.cpp" />
@@ -133,6 +134,15 @@
     <ClCompile Include="EPlayerController.cpp" />
     <ClCompile Include="ETank.cpp" />
     <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EGame.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EGame.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\win.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

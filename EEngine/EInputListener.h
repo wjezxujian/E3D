@@ -8,7 +8,7 @@ namespace E3D
 	{
 	public:
 		virtual EBool keyPress(EInt key) = 0;
-		virtual EBool keyRelase(EInt key) = 0;
+		virtual EBool keyRelease(EInt key) = 0;
 
 		virtual EBool mouseButtonDown(EInt mouseButton) = 0;
 		virtual EBool mouseButtonRelease(EInt mouseButton) = 0;

@@ -17,7 +17,7 @@ namespace E3D
 
 		virtual EBool mouseButtonDown(EInt mouseButton) { return true; }
 		virtual EBool mouseButtonRelease(EInt mouseButton) { return true; }
-		virtual EBool mouseButtonMove(EInt x, EInt y) { return true; }
+		virtual EBool mouseMove(EInt x, EInt y) { return true; }
 		virtual EBool mouseWheel(EInt delta) { return true; }
 
 		//更新和绘制

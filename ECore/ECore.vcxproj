@@ -134,6 +134,9 @@
     <ClCompile Include="EUtil.cpp" />
     <ClCompile Include="EVector.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ECore.cd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
