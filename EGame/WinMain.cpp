@@ -4,6 +4,7 @@
 #include "EUtil.h"
 #include "EGame.h"
 #include "res/resource.h"
+#include <WinUser.h>
 
 using namespace E3D;
 
@@ -26,7 +27,7 @@ int WINAPI WinMain(
 	//设置游戏的小图标
 	HWND hwnd = EGameWindow::GWindow->getHWnd();
 	LONG iconID = (LONG)LoadIcon(::GetModuleHandle(0), MAKEINTRESOURCE(IDI_ICON_TANKWAR));
-	::SetClassLong(hwnd, GCL_HICON, iconID);
+	SetClassLong(hwnd, -14, iconID);
 
 	EGame* game = new EGame;
 	EGameWindow::GWindow->setCanvasListener(game);
@@ -38,5 +39,5 @@ int WINAPI WinMain(
 
 	CloseLog();
 
-	return;
+	return 0;
 }

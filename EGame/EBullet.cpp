@@ -50,7 +50,7 @@ namespace E3D
 		EMesh* obj = mGameMgr->checkObject(pos.x, pos.y);
 		if (obj)
 		{
-			mGameMgr->playSound(SOUND_EXPLODE);
+			mGameMgr->playSound(SOUND_TYPE::SOUND_EXPLODE);
 			mGameMgr->destroyBullet(this);
 		}
 		else
@@ -61,7 +61,7 @@ namespace E3D
 			{
 				//±»»÷ÖÐ
 				tank->onHited();
-				mGameMgr->playSound(SOUND_EXPLODE);
+				mGameMgr->playSound(SOUND_TYPE::SOUND_EXPLODE);
 				mGameMgr->destroyBullet(this);
 			}
 		}

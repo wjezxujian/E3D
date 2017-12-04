@@ -1,6 +1,7 @@
 #include "ETank.h"
 #include "EBullet.h"
 #include "EGameManager.h"
+#include "EMatrix.h"
 
 namespace E3D
 {
@@ -32,7 +33,7 @@ namespace E3D
 
 	void ETank::fire()
 	{
-		if (mGameMgr && mLastFire->mFireFrequency)
+		if (mGameMgr && mLastFire> mFireFrequency)
 		{
 			EBullet* bullet = mGameMgr->createBullet(this);
 			bullet->setPosition(getPosition() + mFireDir * 5.0f + EVector3D(0, 2, 0));
@@ -40,7 +41,7 @@ namespace E3D
 			bullet->yaw(mHead->getRotateVec().y);
 			mLastFire = 0;
 
-			mGameMgr->playSound(SOUND_FIRE);
+			mGameMgr->playSound(SOUND_TYPE::SOUND_FIRE);
 		}
 	}
 
@@ -196,12 +197,6 @@ namespace E3D
 	{
 		mBody->setPosition(pos);
 		mHead->setPosition(pos);
-	}
-
-	void ETank::yaw(EFloat degree)
-	{
-		mBody->yaw(degree);
-		mHead->yaw(degree);
 	}
 
 	void ETank::yaw(EFloat degree)

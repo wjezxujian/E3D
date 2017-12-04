@@ -52,7 +52,7 @@ namespace E3D
 	}
 
 	//É¾³ıËùÓĞµÆ¹â
-	void DestroyAllLights()
+	void DestoryAllLights()
 	{
 		for (LightItr itr = GLights->begin(); itr != GLights->end(); ++itr)
 			SafeDelete(*itr);

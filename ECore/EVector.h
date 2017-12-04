@@ -269,7 +269,6 @@ namespace E3D
 		static EVector4D UNIT_X;
 		static EVector4D UNIT_Y;
 		static EVector4D UNIT_Z;
-		static EVector4D UNIT_W;
 
 		EFloat x;
 		EFloat y;

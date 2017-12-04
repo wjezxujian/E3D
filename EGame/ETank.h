@@ -57,7 +57,7 @@ namespace E3D
 		void yaw(EFloat degree);
 
 		//设置子弹类型BULLER_BALL, BULLET_ROCKET
-		void setBulletType(BulletType type) { return mBulletType = type; }
+		void setBulletType(BulletType type) { mBulletType = type; }
 		BulletType getBulletType() const { return mBulletType; }
 		TankType getTankType() { return mTankType; }
 
@@ -82,6 +82,7 @@ namespace E3D
 		friend class EPlyaerController;
 		ETank(const EString& name, const EString& meshName, EGameManager* gameMgr);
 
+	protected:
 		//更新瞄准器朝向，子弹发射方向
 		void updateFireDir(EFloat degree);
 

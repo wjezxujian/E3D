@@ -18,6 +18,7 @@ namespace E3D
 
 	class EPlayerController
 	{
+	public:
 		virtual ~EPlayerController();
 
 		//设置/获取当前角色的坐标

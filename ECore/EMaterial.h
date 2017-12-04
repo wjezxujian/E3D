@@ -22,7 +22,7 @@ namespace E3D
 	};
 
 	typedef std::map<EString, EMaterial*>::iterator MaterialIter;
-	extern std::map<EString, EMaterial*>* GMaterials = nullptr;
+	extern std::map<EString, EMaterial*>* GMaterials;
 
 	extern EMaterial* GetMaterial(const EString& name);
 	extern bool SetMaterial(const EString& name, EMaterial* material);

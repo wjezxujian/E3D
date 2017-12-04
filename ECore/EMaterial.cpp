@@ -32,6 +32,8 @@ namespace E3D
 			return defaultColor;
 	}
 
+	std::map<EString, EMaterial*>* GMaterials = nullptr;
+
 	static void initMaterial()
 	{
 		static bool init = false;

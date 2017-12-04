@@ -33,7 +33,7 @@ namespace E3D
 		EBool finishGame() const;
 
 		//击毁敌人数目
-		EInt getDestoryEnemyNumber() const { return mCurrentEnemyNumber; }
+		EInt getDestroyEnemyNumber() const { return mCurrentEnemyNumber; }
 		//剩余敌人数目
 		EInt getLastEnemyNumber() const { return mMaxEnemyNumber - mCurrentEnemyNumber; }
 
@@ -61,7 +61,7 @@ namespace E3D
 
 		//通过canGo, checkObject 来模拟简单的碰撞效果
 		//xz平面坐标中x,z坐标是否可通过
-		EBool canGO(EFloat x, EFloat z);
+		EBool canGo(EFloat x, EFloat z);
 		void getLogicXZ(EFloat x, EFloat z, EInt& outX, EInt &outZ);
 		//给定x,z坐标，返回在此坐标的物体（静态物体，不包括子弹或者坦克）
 		EMesh* checkObject(EFloat x, EFloat y);

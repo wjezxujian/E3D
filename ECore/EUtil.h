@@ -49,6 +49,13 @@ namespace E3D
 		return std::stoi(str);
 	}
 
+	//字符串转化为浮点数
+	inline EFloat StringToFloat(const EString &str)
+	{
+		return (EFloat)atof(str.c_str());
+	}
+
+
 	//转化成宽字符串
 	inline EWString ToEWString(const EString& str)
 	{

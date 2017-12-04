@@ -161,7 +161,7 @@ namespace E3D
 	void EGameWindow::onKeyRelease(EInt msg)
 	{
 		for (InputItr itr = mInputListeners.begin(); itr != mInputListeners.end(); ++itr)
-			(*itr)->keyRelase(msg);
+			(*itr)->keyRelease(msg);
 	}
 
 	void EGameWindow::onMousePress(bool rightPress)

@@ -41,7 +41,7 @@ namespace E3D
 			SafeDelete(*itr);
 		}
 
-		for (TankIter itr == mTanks.begin(); itr != mTanks.end(); ++itr)
+		for (TankIter itr = mTanks.begin(); itr != mTanks.end(); ++itr)
 		{
 			SafeDelete(*itr);
 		}
@@ -214,7 +214,7 @@ namespace E3D
 
 		x = StringToFloat(xs);
 		z = StringToFloat(zs);
-		blockSize = StringToFloat();
+		blockSize = StringToFloat(ss);
 	}
 
 	void getValue(const EString& line, EInt& x, EInt& z, EInt& value)
@@ -325,7 +325,7 @@ namespace E3D
 
 					//<Map X="6" Z="2" Value="0" />
 					in.getline(line, 256);
-					EInt x, y, value;
+					EInt x, z, value;
 					getValue(line, x, z, value);
 					if (value >= mCollisionValue[z][x])
 					{
@@ -346,7 +346,7 @@ namespace E3D
 		return true;
 	}
 
-	EBool EGameManager::canGO(EFloat x, EFloat z)
+	EBool EGameManager::canGo(EFloat x, EFloat z)
 	{
 		//³¬³ö±ß½ç
 		if (x <= -mHXL || x >= mHXL || z <= -mHZL || z >= mHZL)

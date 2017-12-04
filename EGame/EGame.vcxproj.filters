@@ -34,7 +34,7 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>include</Filter>
+      <Filter>resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
